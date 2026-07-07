@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get a free week of Claude Code with this referral link.">
+  <title>Free Week of Claude Code</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #faf9f5;
+      --card: #ffffff;
+      --text: #1f1e1c;
+      --muted: #6b6a66;
+      --accent: #c9673f;
+      --accent-hover: #b5562f;
+      --border: #e8e6e0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171614;
+        --card: #201f1c;
+        --text: #f0efec;
+        --muted: #a3a19b;
+        --border: #35332e;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .badge {
+      display: inline-block;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 10px;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .link-box {
+      margin-top: 1.75rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.85rem;
+      color: var(--muted);
+      word-break: break-all;
+      cursor: pointer;
+    }
+
+    .link-box:hover { color: var(--text); }
+
+    .copied {
+      color: var(--accent) !important;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <span class="badge">Referral Offer</span>
+    <h1>Get a free week of Claude Code</h1>
+    <p>Claude Code is Anthropic's AI coding agent that works in your terminal, IDE, and browser. Use my referral link below to try it free for a week.</p>
+    <a class="cta" href="https://claude.ai/referral/2V8g85Rjzw">Claim your free week</a>
+    <div class="link-box" id="refLink" title="Click to copy">https://claude.ai/referral/2V8g85Rjzw</div>
+    <footer>Shared by a happy Claude Code user &middot; referral terms apply</footer>
+  </main>
+
+  <script>
+    const box = document.getElementById('refLink');
+    box.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('https://claude.ai/referral/2V8g85Rjzw');
+        const original = box.textContent;
+        box.textContent = 'Copied to clipboard!';
+        box.classList.add('copied');
+        setTimeout(() => {
+          box.textContent = original;
+          box.classList.remove('copied');
+        }, 1500);
+      } catch (e) { /* clipboard unavailable; link is selectable */ }
+    });
+  </script>
+</body>
+</html>
