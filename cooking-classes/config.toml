@@ -1,0 +1,54 @@
+# Settings for the Bergen County cooking-class finder.
+# Secrets (API keys, tokens) come from environment variables, never this file.
+
+[claude]
+model = "claude-opus-5-5"
+search_effort = "medium"   # web-search discovery step
+extract_effort = "low"     # per-post structured extraction
+
+[web_search]
+enabled = true
+max_searches_per_query = 6
+# Each entry is one Claude web-search session. Claude runs several searches
+# per entry and returns the individual posts/event pages it found.
+queries = [
+  "Facebook events and public Facebook posts advertising cooking classes in Bergen County NJ",
+  "Instagram posts advertising cooking classes or cooking workshops in Bergen County New Jersey (e.g. #bergencounty #njcookingclass)",
+  "Eventbrite, AllEvents, and Meetup listings for cooking classes in Bergen County NJ",
+  "Kids and teen cooking classes, baking classes, and camps in Bergen County NJ",
+  "Library, community center, and adult school cooking classes in Bergen County NJ towns",
+  "Private chef, home cook, and restaurant hosted cooking classes or pop-up workshops in North Jersey near Hackensack, Paramus, Ridgewood, Englewood, Fort Lee",
+]
+
+[reddit]
+enabled = true
+subreddits = ["newjersey", "BergenCounty", "northjersey"]
+search_terms = ["cooking class", "baking class", "cooking workshop"]
+time_window = "month"   # hour, day, week, month, year, all
+
+[instagram]
+# Needs an Instagram Business/Creator account linked to a Facebook app.
+# Set IG_USER_ID and IG_ACCESS_TOKEN env vars. Meta allows 30 unique hashtags / 7 days.
+enabled = true
+hashtags = [
+  "bergencountycookingclass", "njcookingclass", "cookingclassnj",
+  "bergencountynj", "bergencountyeats", "northjerseyfoodie",
+  "njbakingclass", "kidscookingclassnj",
+]
+
+[pages]
+# Venue/organizer pages you want re-checked every run (class calendars, Linktree, etc).
+enabled = true
+urls = [
+  # "https://example-cooking-school.com/classes",
+]
+
+[manual]
+# Drop pasted posts here (one .txt per post, or posts.jsonl). Best route for
+# private Facebook groups, which no API exposes.
+enabled = true
+inbox_dir = "inbox"
+
+[output]
+data_dir = "data"
+only_upcoming = true
