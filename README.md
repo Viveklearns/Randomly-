@@ -15,3 +15,7 @@ This repo contains a simple landing page ([index.html](index.html)) promoting th
 3. Save — your page will be live at `https://<username>.github.io/Randomly-/`
 
 Share that URL wherever you'd like to promote the offer.
+
+## Bergen County cooking-class finder
+
+[`cooking-classes/`](cooking-classes/) is a scheduled workflow that finds cooking classes posted on Facebook, Instagram, Reddit, and event sites for Bergen County, NJ. Claude turns each post into a structured list. See its [README](cooking-classes/README.md).
