@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Presto · Live improv for people who pitch ideas</title>
+<meta name="description" content="A live online improv class that trains storytelling, active listening and thinking on your feet. $25 trial class.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;800;900&family=Figtree:wght@400;600;700&display=swap">
+<style>
+/* Layout: bold single-theme comic-panel page. Hook + what it is, three before/after story cards, the turn, how it works, sign up. */
+:root{--bg:#FFC93C;--paper:#FFFDF6;--ink:#1A1426;--muted:#4A4256;--land:#2F3BE0;--land-ink:#FFFFFF;
+--display:"Archivo","Arial Black",system-ui,sans-serif;--body:"Figtree","Segoe UI",system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-inline:18px;padding-block:0}
+.wrap{max-width:960px;margin:0 auto;display:grid;gap:56px;padding-block:22px 72px}
+.note{font-size:.8rem;border:1.5px dashed var(--ink);border-radius:8px;padding:6px 10px;justify-self:start;background:var(--paper)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{font-family:var(--display);font-weight:900;font-size:1.3rem;letter-spacing:-.02em}
+.top a{color:var(--ink);font-weight:700}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1;text-wrap:balance;letter-spacing:-.02em}
+h1{font-size:clamp(2.7rem,9.5vw,5.6rem);font-weight:900}
+h2{font-size:clamp(1.8rem,6vw,3rem);font-weight:900}
+h3{font-size:1.2rem;font-weight:800;line-height:1.15}
+p{margin:0}
+.hero{display:grid;gap:20px}
+.what{display:grid;gap:14px}
+.what-line{font-size:clamp(1.2rem,2.8vw,1.5rem);font-weight:600;line-height:1.35;max-width:34ch}
+.skills{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.skills li{background:var(--ink);color:var(--bg);font-family:var(--display);font-weight:800;font-size:.95rem;padding:7px 14px;border-radius:999px}
+.cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.btn{font:inherit;font-family:var(--display);font-weight:800;background:var(--land);color:var(--land-ink);border:2px solid var(--ink);border-radius:999px;padding:12px 22px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);text-decoration:none;display:inline-block}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.meta{font-weight:600;font-size:.95rem}
+.price{font-family:var(--display);font-weight:900;font-size:1.05rem}
+.price s,.price-tag s{font-weight:600;opacity:.6;text-decoration-thickness:2px}
+.join-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.price-tag{display:flex;align-items:baseline;gap:8px;background:var(--bg);border:2.5px solid var(--ink);border-radius:12px;padding:6px 14px;transform:rotate(2deg)}
+.price-tag s{font-family:var(--display);font-size:1.1rem}
+.price-tag b{font-family:var(--display);font-weight:900;font-size:1.8rem;line-height:1}
+.price-tag span{font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{background:var(--paper);border:3px solid var(--ink);border-radius:14px;box-shadow:6px 6px 0 var(--ink);overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;min-width:0}
+/* Line up the header, story and blue band across cards in the same row */
+@supports (grid-template-rows:subgrid){.card{grid-row:span 3;grid-template-rows:subgrid;row-gap:0}}
+.card .head{padding:16px 18px 0;display:flex;align-items:center;gap:10px}
+.card .head i{font-style:normal;font-family:var(--display);font-weight:900;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--paper)}
+.card .head span{font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:.05em;font-size:.88rem}
+.miss{padding:12px 18px 16px;display:grid;gap:6px;align-content:start}
+.miss p{color:var(--muted)}
+.miss .res{font-weight:700;color:var(--ink)}
+.miss .res::before{content:"✕  "}
+.land{background:var(--land);color:var(--land-ink);border-top:3px solid var(--ink);padding:14px 18px 18px;display:grid;gap:6px}
+.land .lbl{font-family:var(--display);font-weight:800;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;opacity:.85}
+.land .res{font-weight:700}
+.land .res::before{content:"✓  "}
+
+.turn{background:var(--ink);color:var(--paper);border-radius:18px;padding:34px 26px;display:grid;gap:14px;transform:rotate(-1deg)}
+.turn h2{color:var(--bg)}
+.turn p{font-size:1.15rem;max-width:52ch}
+.muscles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.muscles div{border:2px solid var(--bg);border-radius:12px;padding:14px;display:grid;grid-template-columns:auto 1fr;column-gap:10px;row-gap:4px;align-items:center;min-width:0}
+.muscles i{font-style:normal;font-family:var(--display);font-weight:900;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--bg);color:var(--ink)}
+.muscles b{font-family:var(--display);font-weight:900;font-size:1.15rem;color:var(--bg)}
+.muscles span{grid-column:1/-1;opacity:.9}
+.gym{background:var(--bg);color:var(--ink);padding:0 .3em;border-radius:4px}
+
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.how div{background:var(--paper);border:2.5px solid var(--ink);border-radius:12px;padding:14px 16px;display:grid;gap:2px}
+.how b{font-family:var(--display);font-weight:900;font-size:1.5rem;line-height:1.1}
+.how span{color:var(--muted);font-size:.95rem}
+
+.join{background:var(--paper);border:3px solid var(--ink);border-radius:18px;box-shadow:8px 8px 0 var(--ink);padding:24px;display:grid;gap:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:block;border:2px solid var(--ink);border-radius:999px;padding:8px 14px;font-weight:700}
+.chip input:checked+span{background:var(--ink);color:var(--bg)}
+.chip input:focus-visible+span,input[type=email]:focus-visible,.btn:focus-visible,.top a:focus-visible{outline:3px solid var(--land);outline-offset:2px}
+.tzrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.tzlabel{font-weight:700}
+.tz{display:inline-flex;flex-wrap:wrap;border:2px solid var(--ink);border-radius:999px;overflow:hidden}
+.tz label{position:relative}
+.tz input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.tz span{display:block;padding:7px 14px;font-weight:700;font-size:.92rem}
+.tz input:checked+span{background:var(--ink);color:var(--bg)}
+.tz input:focus-visible+span{outline:3px solid var(--land);outline-offset:-3px}
+.slots-wrap{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
+.slots-wrap legend{font-weight:700;padding:0;margin-bottom:10px}
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.slot{position:relative;cursor:pointer}
+.slot input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.slot .box{display:grid;gap:4px;border:2px solid var(--ink);border-radius:12px;padding:12px 14px;background:#fff;height:100%}
+.slot .day{font-family:var(--display);font-weight:900;font-size:1.05rem}
+.slot .time{font-weight:700;font-variant-numeric:tabular-nums}
+.slot .dates{font-size:.88rem;color:var(--muted)}
+.slot input:checked+.box{background:var(--ink);color:var(--paper)}
+.slot input:checked+.box .dates{color:var(--paper);opacity:.85}
+.slot input:checked+.box .day::after{content:"  ✓";color:var(--bg)}
+.slot input:focus-visible+.box{outline:3px solid var(--land);outline-offset:2px}
+.go{display:flex;gap:10px;flex-wrap:wrap}
+input[type=email]{flex:1 1 220px;min-width:0;font:inherit;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:12px 18px}
+.small{font-size:.92rem;color:var(--muted)}
+.err{color:#B3261E;font-weight:600;min-height:1.2em}
+@media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="logo">PRESTO</div><a href="#join">Save a spot</a></div>
+
+  <div class="hero">
+    <h1>Your idea was right. So why didn't it land?</h1>
+    <div class="what">
+      <p class="what-line">A live online improv class that trains the skills that make ideas land.</p>
+      <ul class="skills" aria-label="Skills you'll train">
+        <li>Storytelling</li><li>Active listening</li><li>Thinking on your feet</li>
+      </ul>
+    </div>
+    <div class="cta-row"><a class="btn" href="#join">Save a spot</a><span class="meta"><span class="price"><s>$50</s> $25</span> trial class · 60 min · small group · no experience needed</span></div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="head"><i>A</i><span>The pitch</span></div>
+      <div class="miss"><h3>Twelve airtight slides.</h3><p>Every number checks out.</p><p class="res">Polite nods. Nothing changes.</p></div>
+      <div class="land"><span class="lbl">With practice</span><p>You open with one customer's story.</p><p class="res">The room leans in.</p></div>
+    </div>
+    <div class="card">
+      <div class="head"><i>B</i><span>The quiet "sure"</span></div>
+      <div class="miss"><h3>Your boss says "sure."</h3><p>You hear yes. They meant no.</p><p class="res">You find out weeks later.</p></div>
+      <div class="land"><span class="lbl">With practice</span><p>You catch the pause and ask why.</p><p class="res">The real objection comes out.</p></div>
+    </div>
+    <div class="card">
+      <div class="head"><i>C</i><span>The tug-of-war</span></div>
+      <div class="miss"><h3>Two sides, one decision.</h3><p>You lay out the trade-off fairly.</p><p class="res">Both sides feel they lost.</p></div>
+      <div class="land"><span class="lbl">With practice</span><p>You "yes, and" both into one plan.</p><p class="res">Everyone owns the outcome.</p></div>
+    </div>
+  </div>
+
+  <div class="turn">
+    <h2>It was never the idea. It was three muscles.</h2>
+    <div class="muscles">
+      <div><i>A</i><b>Storytelling</b><span>Making people feel the idea, not just follow it.</span></div>
+      <div><i>B</i><b>Active listening</b><span>Hearing what's meant, not just what's said.</span></div>
+      <div><i>C</i><b>Thinking on your feet</b><span>Building on what happens instead of defending your plan.</span></div>
+    </div>
+    <p>All three are hard, and you can't build them by reading about them. Like any muscle, they get stronger with reps. <strong class="gym">Presto is the gym.</strong></p>
+  </div>
+
+  <div class="how" aria-label="How it works">
+    <div><b>1 class</b><span>a single trial session to start</span></div>
+    <div><b>60 minutes</b><span>live on video, cameras on</span></div>
+    <div><b>6–8 people</b><span>small enough that everyone plays</span></div>
+    <div><b>1 teacher</b><span>a trained improv instructor</span></div>
+  </div>
+
+  <div class="join" id="join">
+    <div class="join-head"><h2>Book a trial class.</h2><div class="price-tag"><s>$50</s><b>$25</b><span>trial price</span></div></div>
+    <p class="small">Built for people who pitch ideas for a living: product managers, designers, founders and anyone who has to win a room.</p>
+    <form id="f" novalidate style="display:grid;gap:14px">
+      <div class="tzrow">
+        <span class="tzlabel" id="tzlabel">Show times in</span>
+        <div class="tz" role="radiogroup" aria-labelledby="tzlabel">
+          <label><input type="radio" name="tz" id="tz-et" value="0" checked><span>Eastern</span></label>
+          <label><input type="radio" name="tz" id="tz-ct" value="-1"><span>Central</span></label>
+          <label><input type="radio" name="tz" id="tz-mt" value="-2"><span>Mountain</span></label>
+          <label><input type="radio" name="tz" id="tz-pt" value="-3"><span>Pacific</span></label>
+        </div>
+      </div>
+      <fieldset class="slots-wrap">
+        <legend>Pick every class that could work <span class="small">(one 60-min session)</span></legend>
+        <div class="slots" id="slots"></div>
+      </fieldset>
+      <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+      <div class="go"><input type="email" id="email" placeholder="you@work.com" aria-label="Email"><button class="btn" type="submit">Save my spot</button></div>
+      <div class="err" id="err" aria-live="polite"></div>
+      <p class="small">We'll email a $25 payment link once your class fills, so there's nothing to pay today.</p>
+    </form>
+  </div>
+</div>
+<script>
+(function(){
+  // Base times are Eastern. All dates fall after Nov 1, 2026, so Eastern is standard time (EST).
+  var cohorts=[
+    {id:'tue-eve',day:'Tuesday evening',start:20*60,dates:'Tue, Nov 3'},
+    {id:'thu-lunch',day:'Thursday lunch',start:12*60+30,dates:'Thu, Nov 5'},
+    {id:'thu-eve',day:'Thursday evening',start:20*60,dates:'Thu, Nov 5'},
+    {id:'sat-am',day:'Saturday morning',start:10*60,dates:'Sat, Nov 7'}
+  ];
+  var abbr={'0':'ET','-1':'CT','-2':'MT','-3':'PT'};
+  function fmt(m){var h=Math.floor(m/60),mm=m%60,ap=h>=12?'pm':'am',h12=h%12||12;return h12+(mm?':'+String(mm).padStart(2,'0'):'')+' '+ap}
+  var wrap=document.getElementById('slots');
+  cohorts.forEach(function(c){
+    var l=document.createElement('label');l.className='slot';
+    l.innerHTML='<input type="checkbox" name="slot" id="slot-'+c.id+'" value="'+c.id+'"><span class="box"><span class="day"></span><span class="time"></span><span class="dates"></span></span>';
+    l.querySelector('.day').textContent=c.day;l.querySelector('.dates').textContent=c.dates;
+    wrap.appendChild(l);
+  });
+  function render(){
+    var off=document.querySelector('input[name=tz]:checked').value,o=+off*60;
+    cohorts.forEach(function(c){
+      document.querySelector('#slot-'+c.id+' + .box .time').textContent=fmt(c.start+o)+' – '+fmt(c.start+60+o)+' '+abbr[off];
+    });
+  }
+  [].forEach.call(document.querySelectorAll('input[name=tz]'),function(r){r.addEventListener('change',render)});
+  try{var z=Intl.DateTimeFormat().resolvedOptions().timeZone||'';
+    var map={'America/Chicago':'tz-ct','America/Denver':'tz-mt','America/Phoenix':'tz-mt','America/Los_Angeles':'tz-pt'};
+    if(map[z])document.getElementById(map[z]).checked=true;}catch(e){}
+  render();
+})();
+document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();
+var form=this,err=document.getElementById('err');
+var slots=[].map.call(form.querySelectorAll('input[name=slot]:checked'),function(i){return i.value});
+var m=document.getElementById('email').value.trim();
+if(!slots.length){err.textContent='Pick at least one class time.';return}
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)){err.textContent='Enter your email so we can send the details.';return}
+var tz=document.querySelector('input[name=tz]:checked').nextElementSibling.textContent;
+var btn=form.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Saving\u2026';err.textContent='';
+fetch('/api/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:m,slots:slots,tz:tz,company:(document.getElementById('company')||{}).value||''})})
+.then(function(r){if(!r.ok)throw new Error();form.innerHTML='<h3>You\u2019re in. Yes, and\u2026</h3><p class="small">we\u2019ll email you when your class is confirmed, with a $25 payment link.</p>';})
+.catch(function(){btn.disabled=false;btn.textContent='Save my spot';err.textContent='Something went wrong saving your spot. Please try again.';});
+});
+</script>
+</body>
+</html>
